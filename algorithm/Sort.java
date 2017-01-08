@@ -110,7 +110,7 @@ public class Sort
         
         while (i <= j) 
         {
-            while (list[i] <= pivotItem)
+            while (list[i] < pivotItem)
             {
                 i++;
             }
