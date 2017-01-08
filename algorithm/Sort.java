@@ -69,7 +69,7 @@ public class Sort
     
     public static void quickSort(int[] list)
     {
-        Sort.quickSort(list, 0, list.length);
+        Sort.quickSort(list, 0, list.length - 1);
     }
     
     // Validate leftIndex and rightIndex concerning being within the
@@ -77,21 +77,21 @@ public class Sort
     
     public static void quickSort(int[] list, int leftIdx, int rightIdx)
     {
-        if (leftIdx < 0 || leftIdx > list.length - 1 
-                || rightIdx < 0 || rightIdx > list.length - 1) 
+        if (leftIdx < 0 || leftIdx >= list.length) 
         {
-            throw new IllegalArgumentException("Left or right index invalid.");
+            throw new IllegalArgumentException("Left index invalid.");
+        }
+        
+        if (rightIdx < 0 || rightIdx >= list.length) 
+        {
+            throw new IllegalArgumentException("Right index invalid.");
         }
         
         int index = divide(list, leftIdx, rightIdx);
         
-        if (leftIdx < index - 1) 
+        if (index - 1 > leftIdx) 
         {
-            quickSort(list, leftIdx, index - 1);
-        }
-        
-        if (index < rightIdx) 
-        {
+            quickSort(list, leftIdx, index - 1);          
             quickSort(list, index + 1, rightIdx);
         }
     }
@@ -99,7 +99,7 @@ public class Sort
     public static int divide(int [] list, int leftIdx, int rightIdx)
     {
         if (leftIdx < 0 || leftIdx > list.length - 1 
-                || rightIdx < 0 || rightIdx > list.length - 1) 
+                || rightIdx <= 0 || rightIdx > list.length - 1) 
         {
             throw new IllegalArgumentException("Left or right index invalid.");
         }
@@ -110,12 +110,12 @@ public class Sort
         
         while (i <= j) 
         {
-            while (list[i] < pivotItem)
+            while (i < list.length - 1 && list[i] < pivotItem)
             {
                 i++;
             }
             
-            while (list[j] >= pivotItem) 
+            while (j > 0 && list[j] >= pivotItem) 
             {
                 j--;
             }

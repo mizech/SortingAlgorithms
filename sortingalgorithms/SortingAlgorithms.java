@@ -10,15 +10,20 @@ public class SortingAlgorithms
 
     public static void main(String[] args)
     {
-        //int[] test = { 9, 16, 17, 5, 3, 18, 14, 4, 14, 17 };
+        /*
         
-        int[] test = {16, 17, 5, 3, 18, 14, 4, 14 };
+        [9, 16, 17, 5, 3, 18, 14, 4, 14, 17]
+        [3, 4, 5, 9, 14, 14, 16, 17, 17, 18] 
         
+        [3, 4, 5, 9, 14, 16, 14, 17, 17, 18]
+        
+        */
+        
+        int[] test = { 9, 16, 17, 5, 3, 18, 14, 4, 14, 17 };
         out.println(Sort.toString(test) + "\n");
         
-        int result = Sort.divide(test, 0, test.length - 1);
+        Sort.quickSort(test, 0, 9);
         
-        out.println(result);
         out.println(Sort.toString(test));
     }
     
