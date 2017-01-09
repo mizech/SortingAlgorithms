@@ -73,24 +73,23 @@ public class Sort
     }
     
     // Validate leftIndex and rightIndex concerning being within the
-    //  array range.
-    
+    //  array range.   
     public static void quickSort(int[] list, int leftIdx, int rightIdx)
     {
-        if (leftIdx < 0 || leftIdx >= list.length) 
+        if (leftIdx > list.length) 
         {
             throw new IllegalArgumentException("Left index invalid.");
         }
         
-        if (rightIdx < 0 || rightIdx >= list.length) 
+        if (rightIdx < 0 || rightIdx > list.length) 
         {
             throw new IllegalArgumentException("Right index invalid.");
         }
         
-        int index = divide(list, leftIdx, rightIdx);
-        
-        if (index - 1 > leftIdx) 
+        if (leftIdx < rightIdx) 
         {
+            int index = divide(list, leftIdx, rightIdx);
+            
             quickSort(list, leftIdx, index - 1);          
             quickSort(list, index + 1, rightIdx);
         }
@@ -99,7 +98,7 @@ public class Sort
     public static int divide(int [] list, int leftIdx, int rightIdx)
     {
         if (leftIdx < 0 || leftIdx > list.length - 1 
-                || rightIdx <= 0 || rightIdx > list.length - 1) 
+                || rightIdx < 0 || rightIdx > list.length - 1) 
         {
             throw new IllegalArgumentException("Left or right index invalid.");
         }
@@ -108,35 +107,35 @@ public class Sort
         int i = leftIdx;
         int j = rightIdx - 1;
         
-        while (i <= j) 
+        do 
         {
-            while (i < list.length - 1 && list[i] < pivotItem)
+            while (list[i] < pivotItem && i < rightIdx)
             {
                 i++;
             }
             
-            while (j > 0 && list[j] >= pivotItem) 
+            while (list[j] >= pivotItem && j > leftIdx) 
             {
                 j--;
             }
             // As long as leftIdx have not overstep rightIdx ...
-            if (i <= j) 
+            if (i < j) 
             {
                 int tmp = list[i];
                 
                 list[i] = list[j];
                 list[j] = tmp;
+            } 
+        } while (i < j);
                 
-                i++;
-                j--;
-            }
+        if (list[i] > pivotItem) 
+        {
+            int tmp = list[i];
+            list[i] = pivotItem;
+            list[rightIdx] = tmp;
         }
         
-        int tmp = list[j + 1];
-        list[j + 1] = pivotItem;
-        list[rightIdx] = tmp;
-        
-        return j + 1;
+        return i;
     }
     
     // Exchange the array-elements i and j.

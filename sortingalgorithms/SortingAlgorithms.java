@@ -20,11 +20,11 @@ public class SortingAlgorithms
         */
         
         int[] test = { 9, 16, 17, 5, 3, 18, 14, 4, 14, 17 };
-        out.println(Sort.toString(test) + "\n");
+        out.println("Before: " + Sort.toString(test) + "\n");
         
         Sort.quickSort(test, 0, 9);
         
-        out.println(Sort.toString(test));
+        out.println("After: " + Sort.toString(test));
     }
     
 }
